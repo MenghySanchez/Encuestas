@@ -15,6 +15,7 @@ function Activate()
         `EncuestaId` INT NULL AUTO_INCREMENT,
         `Nombre` VARCHAR(45) NOT NULL, 
         `ShortCode` VARCHAR(45) NOT NULL, 
+        `CantEsperadas` INT NOT NULL, 
         PRIMARY KEY (`EncuestaId`));";
     $wpdb->query($sql);
     
