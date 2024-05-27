@@ -12,12 +12,19 @@ function Activate()
     global $wpdb;
 
     $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}encuestas(
-    `EncuestaId` INT NULL AUTO_INCREMENT,
-    `Nombre` VARCHAR(45) NOT NULL, 
-    `ShortCode` VARCHAR(45) NOT NULL, 
-    PRIMARY KEY (`EncuestaId`));";
+        `EncuestaId` INT NULL AUTO_INCREMENT,
+        `Nombre` VARCHAR(45) NOT NULL, 
+        `ShortCode` VARCHAR(45) NOT NULL, 
+        PRIMARY KEY (`EncuestaId`));";
     $wpdb->query($sql);
     
+    $sql2 = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}encuestas_detalle(
+        `DetalleId` INT NULL AUTO_INCREMENT,
+        `EncuestaId` INT NULL NOT NULL, 
+        `Pregunta` VARCHAR(45) NOT NULL, 
+        `Tipo` VARCHAR(45) NOT NULL, 
+        PRIMARY KEY (`DetalleId`));";
+    $wpdb->query($sql2);
 }
 
 function Deactivate()
@@ -49,7 +56,7 @@ function MakeMenu()
         'Resultados',
         'manage_options',
         null,
-        plugin_dir_path(__FILE__) . 'admin/pages/resultados_encuestas.php'
+        plugin_dir_url(__FILE__) . 'admin/pages/resultados_encuestas.php'
     );
 }
 
