@@ -3,8 +3,13 @@
     $query = "SELECT * FROM {$wpdb->prefix}encuestas";
     $lista_encuestas = $wpdb->get_results($query,ARRAY_A);
     if(empty($lista_encuestas)){$lista_encuestas =  array();}
-?>
 
+    #esta consulta por el momento cuenta la cantidad de encuestas, la intención es que cuente la cantidad de respuestas en base
+    #al id de la encuesta principal 
+    $query2 = "SELECT COUNT(*) as num_rows FROM {$wpdb->prefix}encuestas";
+    $numCompletadas = ($wpdb->get_results($query2))[0]->num_rows;
+    
+?>
 <div class="wrap">
     <div>
         <?php
@@ -42,10 +47,6 @@
                     ";
                 }
             ?>
-
-        
-        
-            
         </tbody>
     </table>
 </div>
